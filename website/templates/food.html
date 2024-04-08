@@ -1,11 +1,14 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %}
+{% extends "base.html" %} {% block title %}วงนอก Wongnok{% endblock %}
 
-    <h1 align="center">เมนูอาหาร</h1>
-    {% for note in user.notes %}
-    <li class="list-group-item">
-        {{ note.data }}
-      
-      </li>
-      {% endfor %}
-    {% endblock %}
+{% block content%}
+<br />
+<h3 align="center">สูตรอาหาร</h3>
+<ul class="list-group list-group-flush" id="notes">
+  {% for n in note_dmm %}
+  <li class="list-group-item">
+    {% print(n.data) %}
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+      {% endblock %}
