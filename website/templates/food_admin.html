@@ -2,22 +2,22 @@
 
 {% block content%}
 <br />
-<h3 align="center">ลบสูตรอาหาร</h3>
+<h3 align="center">รายการอาหารทั้งหมด</h3>
 <ul class="list-group list-group-flush" id="notes">
   {% for n in note_dmm %}
   <li class="list-group-item">
     {% print(n.data) %}
-    <button type="button" class="close" onClick="deleteNote({{ n.data }})">
+    <!-- <button type="button" class="close" onClick="deleteNote({{ n.data }})">
       <span aria-hidden="true">&times;</span>
-    </button>
+    </button> -->
   </li>
   {% endfor %}
 </ul>
-<form method="POST">
+<!-- <form method="POST">
   <textarea name="note" id="note" class="form-control"></textarea>
   <br />
   <div align="center">
     <button type="submit" class="btn btn-primary">บันทึก</button>
-  </div>
+  </div> -->
 </form>
       {% endblock %}
