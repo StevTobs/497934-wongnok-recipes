@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+
+    <h1 align="center">เมนูอาหาร</h1>
+    {% for note in user.notes %}
+    <li class="list-group-item">
+        {{ note.data }}
+      
+      </li>
+      {% endfor %}
+    {% endblock %}
