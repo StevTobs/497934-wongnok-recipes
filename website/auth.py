@@ -39,12 +39,6 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@auth.route('/food')
-@login_required
-def food_user():
-    food_user()
-    return redirect(url_for('views.food'))
-
 
 @auth.route('/sign-up', methods=['GET','POST'])
 def sign_up():

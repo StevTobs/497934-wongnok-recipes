@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}วงนอก Wongnok (admin){% endblock %}
+
+{% block content%}
+<ul class="list-group list-group-flush" id="notes">
+  {% for n in note_dmm %}
+  <li class="list-group-item">
+    {% print(n.data) %}
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

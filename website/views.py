@@ -50,13 +50,25 @@ def delete_note():
                db.session.commit()
                return jsonify({})
           
-@views.route('/food')
+@views.route('/food', methods=['GET','POST'])
 # @login_required
 def food():
      note_dmm = Note.query.all()
-     print( note_dmm[0].data )
+     # print( note_dmm[0].data )
 
-     return render_template("food.html", user=current_user,note_dmm=note_dmm)
+     if request.method == 'POST':
+          # search_term = request.form.get('search_term', None)
+          search_term = request.form.get('search_term', None)
+          print(search_term )
+     if search_term:
+          note_dmm = Note.query.filter(Note.data.contains(search_term)).all()
+     else:
+          note_dmm = Note.query.all()
+
+     if note_dmm:
+          print(note_dmm[0].data) 
+     return render_template("food.html", note_dmm=note_dmm, user=current_user)
+
 
 @views.route('/food_admin')
 @login_required
@@ -70,3 +82,5 @@ def food_admin():
 @views.route('/food_form')
 def food_form():
      return render_template("food_form.html", user=current_user)
+
+
