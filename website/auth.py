@@ -16,6 +16,7 @@ def login():
 
         user = User.query.filter_by(email=email).first()
         note_dmm = Note.query.all()
+        
         print("--------")
         print(note_dmm )
         print("--------")

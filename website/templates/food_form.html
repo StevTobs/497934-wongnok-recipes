@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}วงนอก{% endblock %} 
+{% block content%}
+    {% for n in range(2)%}
+    <form>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">ชื่ออาหาร</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+            </div>
+
+        <div class="form-group">
+        <label for="exampleFormControlSelect1">เวลาที่ใช้ทำอาหาร</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option>โปรดเลือก</option>
+            <option>5-10 mins</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        </div>
+       
+
+
+        <div class="form-group">
+        <label for="exampleFormControlTextarea1">วัตถุดิบ</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">ขั้นตอน</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+    </form>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect2">เวลา</label>
+        <select multiple class="form-control" id="exampleFormControlSelect2">
+            <option>5 - 10 mins</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+        </div>
+
+</br>
+    {% endfor %}
+
+{% endblock %}

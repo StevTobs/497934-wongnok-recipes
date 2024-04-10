@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template, request, flash
 from flask_login import login_required, current_user
 from . import db   ##means from __init__.py import db
-from .models import Note, Food
+from .models import Note
 import json
 
 # --------
@@ -65,3 +65,8 @@ def food_admin():
      print( note_dmm[0].data )
 
      return render_template("food_admin.html", user=current_user,note_dmm=note_dmm)
+
+
+@views.route('/food_form')
+def food_form():
+     return render_template("food_form.html", user=current_user)
