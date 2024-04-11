@@ -19,7 +19,7 @@
 
 </br>
 {% for n in food_dmm %}
-<div class="card" style="width: 30rem;">
+<div class="card" style="width: 50rem;">
   
   <img class="card-img-top" src= {{ n.food_image_path }} alt="Card image cap">
   <div class="card-body">
@@ -36,10 +36,15 @@
   <form method="POST" action="/delete_food/{{ n.id }}">
     <button type="submit" class="btn btn-danger">Delete</button>
   </form> -->
-  
+
+</br>
+
+<hr width="100%" color="green" size="50px" align="center" />
+
 </div>
 {% endfor %}
-</br>
+
+
 
 
       {% endblock %}
