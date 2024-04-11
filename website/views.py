@@ -19,27 +19,49 @@ views = Blueprint('views',__name__)
 
 # @views.route('/')
 # @login_required #this code limit the only user who have logined can access.
+@views.route('/food', methods=['GET','POST'])
+@login_required
+def food():
+     food_dmm = Food.query.all()
+     # print( note_dmm[0].data )
+
+     if request.method == 'POST':
+          # search_term = request.form.get('search_term', None)
+          search_term = request.form.get('search_term', None)
+          print(search_term )
+     # if search_term:
+          food_dmm = Food.query.filter(Food.food_name.contains(search_term)).all()
+     else:
+          food_dmm = Food.query.all()
+
+     if food_dmm:
+          print(food_dmm [0].food_name) 
+          print(food_dmm [0].food_image_path ) 
+
+     return render_template("food.html", food_dmm=food_dmm, user=current_user)
+
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+     food_dmm = Food.query.all()
+     # print( note_dmm[0].data )
+
      if request.method == 'POST':
-          note = request.form.get('note')
+          # search_term = request.form.get('search_term', None)
+          search_term = request.form.get('search_term', None)
+          print(search_term )
+     # if search_term:
+          food_dmm = Food.query.filter(Food.food_name.contains(search_term)).all()
+     else:
+          food_dmm = Food.query.all()
 
-          if len(note) < 1 :
-               flash('Note is too short!', category='error')
-          else:
-               # new_note = Note(data=note)
-               new_note = Note(data=note,user_id = current_user.id )
+     if food_dmm:
+          print(food_dmm [0].food_name) 
+          print(food_dmm [0].food_image_path ) 
 
-               db.session.add(new_note)
-               db.session.commit()
+     return render_template("food.html", food_dmm=food_dmm, user=current_user)
 
-               flash('Note added!', category='success')
-
-
-
-     return render_template("home.html", user=current_user)
      # return render_template("home.html")
 
 @views.route('/delete-note', methods=['POST'])
@@ -77,26 +99,6 @@ def delete_food(food_id):
     else:
         return redirect(request.url), jsonify({'error': 'Food item not found'}), 404
     
-@views.route('/food', methods=['GET','POST'])
-@login_required
-def food():
-     food_dmm = Food.query.all()
-     # print( note_dmm[0].data )
-
-     if request.method == 'POST':
-          # search_term = request.form.get('search_term', None)
-          search_term = request.form.get('search_term', None)
-          print(search_term )
-     # if search_term:
-          food_dmm = Food.query.filter(Food.food_name.contains(search_term)).all()
-     else:
-          food_dmm = Food.query.all()
-
-     if food_dmm:
-          print(food_dmm [0].food_name) 
-          print(food_dmm [0].food_image_path ) 
-
-     return render_template("food.html", food_dmm=food_dmm, user=current_user)
 
 @views.route('/food_publish', methods=['GET','POST'])
 def food_publish():
