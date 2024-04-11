@@ -31,11 +31,17 @@
     <li class="list-group-item">ระยะเวลา:{{ n.food_time}} </li>
     <li class="list-group-item">ความยากง่ายของสูตร: {{n.difficult_level}} </li>
   </ul>
-  
-  <!-- Delete button form -->
+  <h7 align="center"> ความพึงพอใจ </h7>
+  <div class="btn-group" role="group" aria-label="Basic example">
+    
+    <button type="button" class="btn btn-secondary">พอใช้</button>
+    <button type="button" class="btn btn-secondary">ปานกลาง</button>
+    <button type="button" class="btn btn-secondary">ดีมาก</button>
+  </div>
+  <!-- Delete button form
   <form method="POST" action="/delete_food/{{ n.id }}">
     <button type="submit" class="btn btn-danger">Delete</button>
-  </form>
+  </form> -->
   
 </div>
 {% endfor %}

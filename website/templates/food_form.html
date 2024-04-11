@@ -1,49 +1,118 @@
 {% extends "base.html" %} {% block title %}วงนอก{% endblock %} 
 {% block content%}
-    {% for n in range(2)%}
-    <form>
 
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">ชื่ออาหาร</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-            </div>
-
-        <div class="form-group">
-        <label for="exampleFormControlSelect1">เวลาที่ใช้ทำอาหาร</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-            <option>โปรดเลือก</option>
-            <option>5-10 mins</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-        </div>
-       
-
-
-        <div class="form-group">
-        <label for="exampleFormControlTextarea1">วัตถุดิบ</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">ขั้นตอน</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-            </div>
-    </form>
-
-    <div class="form-group">
-        <label for="exampleFormControlSelect2">เวลา</label>
-        <select multiple class="form-control" id="exampleFormControlSelect2">
-            <option>5 - 10 mins</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-        </select>
-        </div>
 
 </br>
-    {% endfor %}
+<h1 align="center">เพิ่มสูตรอาหาร</h1>
+<form method="POST" enctype="multipart/form-data">
+  
+   <!-- File name zone --> 
+  <div class="form-group">
+    <label for="food_name">ชื่อเมนู</label>
+    <input type="text" 
+    class="form-control" 
+    id="food_name" 
+    name="food_name"
+    placeholder="ชื่อเมนู">
+  </div>
+
+        <!-- food_raw zone --> 
+        <div class="form-group">
+          <label for="food_raw">วัตถุดิบ</label>
+          <input type="text" 
+          class="form-control" 
+          id="food_raw" 
+          name="food_raw"
+          placeholder="วัตถุดิบ">
+        </div>
+
+         <!-- food_stepzone --> 
+        <div class="form-group">
+          <label for="food_step">ขั้นตอน</label>
+          <input type="text" 
+          class="form-control" 
+          id="food_step" 
+          name="food_step"
+          placeholder="ขั้นตอน">
+        </div>
+
+        <!-- food_time zone --> 
+        <div class="form-group">
+          <label for="food_time">ระยะเวลา</label>
+          <select multiple class="form-control" id="food_time" name="food_time">
+            <option>5 - 10 mins</option>
+            <option>11 - 30 mins</option>
+            <option>31 - 60 mins</option>
+            <option>60+ mins</option>
+          </select>
+        </div>
+
+        <!-- food difficult_level  zone --> 
+        <div class="form-group">
+          <label for="difficult_level">ระยะเวลา</label>
+          <select multiple class="form-control" id="difficult_level" name="difficult_level">
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+          </select>
+        </div>
+
+  <!-- Upload image zone -->
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Upload</span>
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01" name="image" onchange="updateFileName(this)">
+        {% if file_name %}
+        <label class="custom-file-label" id="fileLabel" for="inputGroupFile01">{{ file_name }}</label>
+        {% else %}
+        <label class="custom-file-label" id="fileLabel" for="inputGroupFile01">อัพโหลดรูปภาพ</label>
+        {% endif %}
+    </div>
+  </div>
+  <div id="uploadMessage"></div> <!-- Message container -->
+  <button type="submit" class="btn btn-secondary btn-lg" id="submitButton" disabled>เพิ่มสูตรอาหาร</button>
+
+<script>
+    function updateFileName(input) {
+        var fileName = input.files[0].name;
+        var label = document.getElementById('fileLabel');
+        var uploadMessage = document.getElementById('uploadMessage');
+        var submitButton = document.getElementById('submitButton');
+        
+        // Check if a file has been selected
+        if (fileName) {
+            uploadMessage.innerHTML = ''; // Clear the message
+            submitButton.disabled = false; // Enable the button
+            submitButton.classList.remove("btn-secondary"); // Remove secondary class
+            submitButton.classList.add("btn-primary"); // Add primary class
+            submitButton.classList.add("btn-lg"); // Add large button class
+            label.innerHTML = fileName;
+            // Update the file_name variable (if using a template language like Jinja)
+            {% if file_name %}
+            var file_name = fileName;
+            {% else %}
+            var file_name = "";
+            {% endif %}
+        } else {
+            // No file selected, disable the button
+            uploadMessage.innerHTML = 'Please select a file';
+            submitButton.disabled = true;
+            submitButton.classList.remove("btn-primary"); // Remove primary class
+            submitButton.classList.add("btn-secondary"); // Add secondary class
+            submitButton.classList.add("btn-lg"); // Add large button class
+            label.innerHTML = 'อัพโหลดรูปภาพ';
+        }
+    }
+</script>
+
+</form>
+
+
+    
+    
+</br>
 
 {% endblock %}

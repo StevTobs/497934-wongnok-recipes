@@ -2,7 +2,18 @@
 {% block content
     %}
 
-    <h3 align="center">แก้ไขวิธีทำอาหาร</h3>
+    <h3 align="center">ลบเมนูอาหาร</h3>
+
+    <ul class="list-group list-group-flush" id="foods">
+      {% for food in user.foods %}
+      <li class="list-group-item">
+        {{ food.food_name }}
+        <button type="button" class="close" onClick="deleteNote({{ food }})">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
 
       <ul class="list-group list-group-flush" id="notes">
         {% for note in user.notes %}
@@ -14,6 +25,7 @@
         </li>
         {% endfor %}
       </ul>
+
       <form method="POST">
         <textarea name="note" id="note" class="form-control"></textarea>
         <br />
