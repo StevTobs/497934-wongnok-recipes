@@ -1,19 +1,21 @@
 {% extends "base.html" %} {% block title %}วงนอก{% endblock %} 
 {% block content%}
 </br>
+</br>
+
 <h3 align="center">สูตรอาหาร</h3>
 
 </br>
 
 <div style="display: flex; justify-content:center;">
-  <form class="body-content row g-2" method="POST">
+  <form method="POST">
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
-          <input type="text" class="form-control" id="search_term" name="search_term" placeholder="ค้นหาสูตรอาหาร">
+          <input type="text" class="form-control me-2" id="search_term" name="search_term" placeholder="ค้นหาสูตรอาหาร">
         </div>
         <div class="col-md-4 col-lg-4 order-md-last">
-          <button type="submit" class="btn btn-success">Search</button>
+          <button type="submit" class="btn btn-outline-success">Search</button>
         </div>
       </div>
     </div>
@@ -53,7 +55,7 @@
         <div class="button_delete_manu" style="display: flex; align-items: left;">
           <form method="POST" action="/rating/{{ n.id }}">
          
-            {%if Is_rating(n.id) %}
+            {%if Is_rating(n.id) or current_user.id == n.user_id %}
               <button type="submit" class="btn btn-warning disabled" disabled> Rating (+1) </button>
             {%else%}
               <button type="submit" class="btn btn-warning" > Rating (+1) </button>
@@ -82,12 +84,13 @@
 </br>
 
 </div>
-<hr width="100%" color="green" size="50px" align="center" />
+
 </br> 
 
   
 </div>
 {% endfor %}
+<hr width="100%" color="green" size="50px" align="center" />
 </br>
 
 
