@@ -71,7 +71,7 @@ def home():
           print(food_dmm [0].food_name) 
           print(food_dmm [0].food_image_path ) 
 
-     return render_template("food.html", food_dmm=food_dmm, current_user=current_user, Find_username=Find_username,Is_rating=Is_rating, Count_rating=Count_rating )
+     return render_template("food_publish.html", food_dmm=food_dmm, current_user=current_user, Find_username=Find_username,Is_rating=Is_rating, Count_rating=Count_rating )
 
 
 def Is_rating(food_id):
