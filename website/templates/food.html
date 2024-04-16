@@ -50,10 +50,10 @@
   
 <!-- </br> -->
   <!-- Rating button form -->
-    <li class="list-group-item">
-      <div style="display: flex; justify-content: center;">
-        <div class="button_delete_manu" style="display: flex; align-items: left;">
-          <form method="POST" action="/rating/{{ n.id }}">
+    <li class="list-group-item" style="display: flex; justify-content: center; align-items: center;"><p class="h6 order-md-last" style="margin-left: 40px;"> <code> Rating :  {{ Count_rating(n.id) }} คะแนน</code></p>
+
+        <!-- <div class="button_delete_manu" align="right"> -->
+          <form method="POST" action="/rating/{{ n.id }} " align="right">
          
             {%if Is_rating(n.id) or current_user.id == n.user_id %}
               <button type="submit" class="btn btn-warning disabled" disabled> Rating (+1) </button>
@@ -61,10 +61,7 @@
               <button type="submit" class="btn btn-warning" > Rating (+1) </button>
             {% endif %}
           </form>
-          <p class="h6 order-md-last" style="margin-left: 40px;"> Rating :  {{ Count_rating(n.id) }} คะแนน</p>
-        </div>
-
-      </div>
+      <!-- </div> -->
     </li>
     <li class="list-group-item">
 
@@ -76,7 +73,13 @@
     <!-- Delete button form -->
     <div class="button_delete_manu" align="right">
     <form method="POST" action="/delete_food/{{ n.id }}">
-      <button type="submit" class="btn btn-danger" >ลบเมนู</button>
+          {%if  current_user.is_authenticated and current_user.id == n.user_id %}
+              
+              <button type="submit" class="btn btn-danger" >ลบเมนู</button>
+            {%else%}
+            <button type="submit" class="btn btn-danger" disabled>ลบเมนู</button>
+            {% endif %}
+     
     </br>
     </form>
 </div>
