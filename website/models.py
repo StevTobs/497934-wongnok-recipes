@@ -8,6 +8,10 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+class RatingMemory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    food_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Food(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,21 +19,11 @@ class Food(db.Model):
     food_raw = db.Column(db.String(10000))
     food_step = db.Column(db.String(10000))
     food_time = db.Column(db.Integer)
+    food_rating = db.Column(db.Integer)
     food_image_path = db.Column(db.String(10000))  # Add this line for food_image_path column
     difficult_level = db.Column(db.Integer)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-# class Food(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     food_name = db.Column(db.String(10000))
-#     food_raw = db.Column(db.String(10000))
-#     food_step= db.Column(db.String(10000))
-#     food_time= db.Column(db.Integer)
-#     food_image_path = db.Column(db.String(10000))
-#     difficult_level = db.Column(db.Integer)
-#     date = db.Column(db.DateTime(timezone=True), default=func.now())
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
