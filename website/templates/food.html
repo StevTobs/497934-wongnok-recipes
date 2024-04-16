@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}วงนอก{% endblock %} 
+{% extends "base.html" %} {% block title %}วงนอก{% endblock %}
 {% block content%}
 </br>
 </br>
@@ -22,79 +22,79 @@
   </form>
 </div>
 
-
-
 </br>
 
 
 {% for n in food_dmm %}
 <div class="manu_block" align="center">
-<div class="card" style="width: 30rem;" >
-  
-  <img class="card-img-top" src= {{ n.food_image_path }} alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{n.food_name}}</h5>
-  </div>
-  <ul class="list-group list-group-flush" align="left">
-    <li class="list-group-item"><b>วัตถุดิบ:  </b>{{n.food_raw}} </li>
-    <li class="list-group-item"><b>ขั้นตอน:  </b>{{n.food_step}} </li>
-    <li class="list-group-item"><b>ระยะเวลา:  </b>{{ n.food_time}} </li>
-    <li class="list-group-item"><b>ความยากง่ายของสูตร:  </b>{{n.difficult_level}} </li>
-  
-  <!-- <h7 align="center"> ความพึงพอใจ </h7>
+  <div class="card" style="width: 30rem;">
+
+    <img class="card-img-top" src={{ n.food_image_path }} alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{n.food_name}}</h5>
+    </div>
+    <ul class="list-group list-group-flush" align="left">
+      <li class="list-group-item"><b>วัตถุดิบ: </b>{{n.food_raw}} </li>
+      <li class="list-group-item"><b>ขั้นตอน: </b>{{n.food_step}} </li>
+      <li class="list-group-item"><b>ระยะเวลา: </b>{{ n.food_time}} </li>
+      <li class="list-group-item"><b>ความยากง่ายของสูตร: </b>{{n.difficult_level}} </li>
+
+      <!-- <h7 align="center"> ความพึงพอใจ </h7>
   <div class="btn-group" role="group" aria-label="Basic example"> -->
-    
-    <!-- <button type="button" class="btn btn-secondary">พอใช้</button>
+
+      <!-- <button type="button" class="btn btn-secondary">พอใช้</button>
     <button type="button" class="btn btn-secondary">ปานกลาง</button>
     <button type="button" class="btn btn-secondary">ดีมาก</button> -->
-  
-<!-- </br> -->
-  <!-- Rating button form -->
-    <li class="list-group-item" style="display: flex; justify-content: center; align-items: center;"><p class="h6 order-md-last" style="margin-left: 40px;"> <code> Rating :  {{ Count_rating(n.id) }} คะแนน</code></p>
+
+      <!-- </br> -->
+      <!-- Rating button form -->
+      <li class="list-group-item" style="display: flex; justify-content: center; align-items: center;">
+        <p class="h6 order-md-last" style="margin-left: 40px;"> <code> Rating :  {{ Count_rating(n.id) }} คะแนน</code>
+        </p>
 
         <!-- <div class="button_delete_manu" align="right"> -->
-          <form method="POST" action="/rating/{{ n.id }} " align="right">
-         
-            {%if Is_rating(n.id) or current_user.id == n.user_id %}
-              <button type="submit" class="btn btn-warning disabled" disabled> Rating (+1) </button>
-            {%else%}
-              <button type="submit" class="btn btn-warning" > Rating (+1) </button>
-            {% endif %}
-          </form>
-      <!-- </div> -->
-    </li>
-    <li class="list-group-item">
+        <form method="POST" action="/rating/{{ n.id }} " align="right">
+
+          {%if Is_rating(n.id) or current_user.id == n.user_id %}
+          <button type="submit" class="btn btn-warning disabled" disabled> Rating (+1) </button>
+          {%else%}
+          <button type="submit" class="btn btn-warning"> Rating (+1) </button>
+          {% endif %}
+        </form>
+        <!-- </div> -->
+      </li>
+      <li class="list-group-item">
 
         {% if Find_username(n.user_id) %}
-          <b>ผู้เขียน : </b> {{ Find_username(n.user_id) }}
+        <b>ผู้เขียน : </b> {{ Find_username(n.user_id) }}
         {% endif %}
-  </li>
-  </ul>
+      </li>
+    </ul>
     <!-- Delete button form -->
     <div class="button_delete_manu" align="right">
-    <form method="POST" action="/delete_food/{{ n.id }}">
-          {%if  current_user.is_authenticated and current_user.id == n.user_id %}
-              
-              <button type="submit" class="btn btn-danger" >ลบเมนู</button>
-            {%else%}
-            <button type="submit" class="btn btn-danger" disabled>ลบเมนู</button>
-            {% endif %}
-     
-    </br>
-    </form>
+      <form method="POST" action="/delete_food/{{ n.id }}">
+        {%if current_user.is_authenticated and current_user.id == n.user_id %}
+
+        <button type="submit" class="btn btn-danger">ลบเมนู</button>
+        {%else%}
+        <button type="submit" class="btn btn-danger" disabled>ลบเมนู</button>
+        {% endif %}
+
+        </br>
+      </form>
+    </div>
+  </div>
+  </br>
+
 </div>
-</div>
+
 </br>
 
-</div>
 
-</br> 
-
-  
 </div>
 {% endfor %}
 <hr width="100%" color="green" size="50px" align="center" />
 </br>
 
 
-      {% endblock %}
+{% endblock %}
