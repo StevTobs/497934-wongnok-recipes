@@ -39,7 +39,7 @@
         </div>
         {% if current_user.is_authenticated %}
             <div class="navbar-nav ml-auto"> <!-- Added ml-auto class here for right alignment -->
-                <span class="nav-item nav-link"> <b>ชื่อบัญชี </b>{{ current_user.first_name }}</span>
+                <span class="nav-item nav-link"> <b> User :  </b>{{ current_user.first_name }}</span>
             </div>
         {% endif %}
     </div> 
@@ -90,5 +90,16 @@
     type = "text/javascript"
     src="{{ url_for('static', filename='index.js') }}"></script> 
 </body>
+
+
+
+
+</br></br></br></br></br>
+<div class="form-floating mb-3" align="right">
+
+  <label for="floatingInput">Created by Akanit Kwangkaew 2024&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+</div>
+
+
 
 </html>

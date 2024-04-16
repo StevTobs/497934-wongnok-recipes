@@ -1,58 +1,89 @@
 {% extends "base.html" %} {% block title %}วงนอก{% endblock %}
 {% block content%}
-</br>
-</br>
 
-<h3 align="center">สูตรอาหาร</h3>
+</br></br></br></br>
 
-</br>
+<h1 align="center">สูตรอาหาร</h1>
 
+</br></br>
+<!-- ----------------- -->
+<!-- Search Zone -->
 <div style="display: flex; justify-content:center;">
-  <form method="POST">
+  <form class="body-content row g-2" method="POST">
     <div class="container-fluid">
       <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
-          <input type="text" class="form-control me-2" id="search_term" name="search_term" placeholder="ค้นหาสูตรอาหาร">
+          <input type="text" class="form-control" id="search_term" name="search_term" placeholder="ค้นหาสูตรอาหาร">
         </div>
         <div class="col-md-4 col-lg-4 order-md-last">
-          <button type="submit" class="btn btn-outline-success">Search</button>
+          <button type="submit" class="btn btn-success">Search</button>
         </div>
       </div>
     </div>
   </form>
 </div>
-
-</br>
-
+</br></br></br></br>
+<!-- ---------- -->
 
 {% for n in food_dmm %}
-<div class="manu_block" align="center">
-  <div class="card" style="width: 30rem;">
-
-    <img class="card-img-top" src={{ n.food_image_path }} alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">{{n.food_name}}</h5>
+<div class="container text-center border-bottom">
+  <div class="row">
+    <div class="col-6">
+      <p class="pb-0 mb-0 small lh-sm">
+      <img class="card-img-top" src={{ n.food_image_path }} alt="Card image cap">
+    </p>
     </div>
-    <ul class="list-group list-group-flush" align="left">
-      <li class="list-group-item"><b>วัตถุดิบ: </b>{{n.food_raw}} </li>
-      <li class="list-group-item"><b>ขั้นตอน: </b>{{n.food_step}} </li>
-      <li class="list-group-item"><b>ระยะเวลา: </b>{{ n.food_time}} </li>
-      <li class="list-group-item"><b>ความยากง่ายของสูตร: </b>{{n.difficult_level}} </li>
+    <div class="col-6">
+      <h3 class="display-5 fw-bold" align="left">&nbsp;&nbsp;&nbsp;{{n.food_name}}</h3>
+      <ul class="list-group list-group-flush" align="left">
+        
+        <li class="list-group-item">
+          <p class="pb-0 mb-0 small lh-sm">
+            <strong class="d-block text-gray-dark">วัตถุดิบ</strong>
+            {{n.food_raw}}
+          </p>
+        </li>
 
-      <!-- <h7 align="center"> ความพึงพอใจ </h7>
-  <div class="btn-group" role="group" aria-label="Basic example"> -->
+        <li class="list-group-item">
+          <p class="pb-0 mb-0 small lh-sm">
+            <strong class="d-block text-gray-dark">ขั้นตอน</strong>
+            {{n.food_step}}
+          </p>
+        </li>
 
-      <!-- <button type="button" class="btn btn-secondary">พอใช้</button>
-    <button type="button" class="btn btn-secondary">ปานกลาง</button>
-    <button type="button" class="btn btn-secondary">ดีมาก</button> -->
+        <li class="list-group-item">
+          <p class="pb-0 mb-0 small lh-sm">
+            <strong class="d-block text-gray-dark">ระยะเวลา</strong>
+            {{ n.food_time}}
+          </p>
+        </li>
 
-      <!-- </br> -->
-      <!-- Rating button form -->
-      <li class="list-group-item" style="display: flex; justify-content: center; align-items: center;">
-        <p class="h6 order-md-last" style="margin-left: 40px;"> <code> Rating :  {{ Count_rating(n.id) }} คะแนน</code>
-        </p>
-
-        <!-- <div class="button_delete_manu" align="right"> -->
+        <li class="list-group-item">
+          <p class="pb-0 mb-0 small lh-sm">
+            <strong class="d-block text-gray-dark">ความยากง่ายของสูตร</strong>
+            {{n.difficult_level}} 
+          </p>
+        </li>
+       
+        <li class="list-group-item">
+          {% if Find_username(n.user_id) %}
+          <p class="pb-0 mb-0 small lh-sm ">
+            <strong class="d-block text-gray-dark">ผู้เขียน </strong>
+            {{ Find_username(n.user_id) }}
+          </p>
+          {% endif %}
+        </li>
+        <li class="list-group-item">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="col-6">
+      <div style="display: flex; justify-content: left;">
+        <li class="list-group-item"> 
+        <p class="h6 order-md-last"> <code> <b>ได้รับ</b> {{ Count_rating(n.id) }} คะแนน</code></p>
         <form method="POST" action="/rating/{{ n.id }} " align="right">
 
           {%if Is_rating(n.id) or current_user.id == n.user_id %}
@@ -61,40 +92,33 @@
           <button type="submit" class="btn btn-warning"> Rating (+1) </button>
           {% endif %}
         </form>
-        <!-- </div> -->
       </li>
-      <li class="list-group-item">
-
-        {% if Find_username(n.user_id) %}
-        <b>ผู้เขียน : </b> {{ Find_username(n.user_id) }}
-        {% endif %}
-      </li>
-    </ul>
-    <!-- Delete button form -->
-    <div class="button_delete_manu" align="right">
-      <form method="POST" action="/delete_food/{{ n.id }}">
-        {%if current_user.is_authenticated and current_user.id == n.user_id %}
-
-        <button type="submit" class="btn btn-danger">ลบเมนู</button>
-        {%else%}
-        <button type="submit" class="btn btn-danger" disabled>ลบเมนู</button>
-        {% endif %}
-
-        </br>
-      </form>
+      </div>
+      <!-- <button class="btn btn-primary btn-lg" type="button">Example button</button> -->
+    </div>
+    <div class="col-6">
+      <!-- Delete button form -->
+      <div class="button_delete_manu" align="right">
+        <form method="POST" action="/delete_food/{{ n.id }}">
+          {%if current_user.is_authenticated and current_user.id == n.user_id %}
+  
+          <button type="submit" class="btn btn-danger">ลบเมนู</button>
+          {%else%}
+          <button type="submit" class="btn btn-danger" disabled>ลบเมนู</button>
+          {% endif %}
+          </br>
+        </form>
+      </div>
     </div>
   </div>
-  </br>
-
+</br></br>
 </div>
+</br></br></br></br>
 
-</br>
-
-
-</div>
 {% endfor %}
-<hr width="100%" color="green" size="50px" align="center" />
-</br>
+
+<!-- ----------------- -->
+
 
 
 {% endblock %}
